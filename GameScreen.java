@@ -24,7 +24,7 @@ public class GameScreen extends JPanel{
   
     }
 
-    //Su dung cho viec nhan phim va chuot
+    //Su dung cho class Input va MouseInput
     public Game getGame()
     {
         return game;
