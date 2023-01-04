@@ -41,10 +41,6 @@ public class MenuButton {
         }	
     }
 
-    public void updateMouse()
-    {
-    }
-
     public void setMousePressed(boolean mousePressed)
     {
         this.mousePressed = mousePressed;
