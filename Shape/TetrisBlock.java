@@ -7,7 +7,6 @@ public class TetrisBlock implements Cloneable{
 
     private int x, y;
 
-    //
     private int normal, fast;
 	private int delay;
 	
@@ -147,6 +146,7 @@ public class TetrisBlock implements Cloneable{
             return super.clone();
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
         }
         return null;
     }
