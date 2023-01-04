@@ -13,22 +13,19 @@ import java.awt.image.BufferedImage;
 public class Playing extends State implements StateMethods {
 
     private static final int BOARDX = 10; //Truc ngang
-    private static final int BOARDY = 20; // Truc Doc
+    private static final int BOARDY = 20; // Truc doc
     private static final int BLOCKSIZE = 30; //Kich thuoc moi cell
 
     private TetrisBlock currentBlock;
     private TetrisBlock nextBlock;
-    private TetrisBlock[] blocks; //Mang Chua Cac Khoi I J L O S T Z
+    private TetrisBlock[] blocks; //Mang chua cac khoi I J L O S T Z
 
-    private Color[][] background; //Mang Chua Mau Khac Cac Khoi
+    private Color[][] background; //Mang dung de luu vi tri mau cua cac khoi da roi
 
     private boolean gameOver;
     private boolean gamePause;
     private int score;
     
-
-    // private MenuInGame menuInGame;
-
     private List<MenuButton> buttons;
     private BufferedImage pause;
     private BufferedImage stopPause;
@@ -43,7 +40,6 @@ public class Playing extends State implements StateMethods {
     public Playing(Game game) {
         super(game);
         background = new Color[BOARDY][BOARDX];
-        //menuInGame = new MenuInGame();
         loadImgs();
         loadButtons();
         gameOver = false;
@@ -158,12 +154,6 @@ public class Playing extends State implements StateMethods {
         }
     }
 
-    // public void gameSound(Graphics g)
-    // {
-    // }
-
-
-
     // Random block dau tien
     public void spawNextBlock() {
         initBlock();
@@ -179,7 +169,7 @@ public class Playing extends State implements StateMethods {
         currentBlock.setSpeedLevel(getGame().getMenu().getLevel());
     }
 
-    // Check
+    // Check Game Ket Thuc
     public boolean checkOver() {
         if (currentBlock.getY() < 0)
         {
@@ -275,12 +265,8 @@ public class Playing extends State implements StateMethods {
         for (int row = 0; row < currentBlock.getHeight(); row++) {
             for (int col = 0; col < currentBlock.getWidth(); col++) {
                 if (currentBlock.getShape()[row][col] == 1) {
-                    // int x = (currentBlock.getX()+row)*currentBlockSIZE;
-                    // int y = (currentBlock.getY()+col)* currentBlockSIZE;
                     int x = (currentBlock.getX() + col) * BLOCKSIZE;
                     int y = (currentBlock.getY() + row) * BLOCKSIZE;
-                    // g.setColor(Color.BLUE);
-                    // g.fillRect(x, y, BLOCKSIZE, BLOCKSIZE);
                     drawGridSquare(g, currentBlock.getColor(), x, y);
                 }
             }
@@ -371,7 +357,7 @@ public class Playing extends State implements StateMethods {
             currentBlock.moveRight();
     }
 
-    // Co Dinh Khoi Khi Cham Day
+    // Co dinh khoi khi cham day
     private void moveBlockBackground() {
         if(gameOver == true)
             return;
@@ -584,8 +570,6 @@ public class Playing extends State implements StateMethods {
             case KeyEvent.VK_DOWN:
                 currentBlock.setSpeedUp();
                 break;
-            case KeyEvent.VK_ENTER:
-                gamePause = !gamePause;
         }
 
     }
