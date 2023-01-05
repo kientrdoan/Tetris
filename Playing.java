@@ -43,7 +43,7 @@ public class Playing extends State implements StateMethods {
         loadImgs();
         loadButtons();
         gameOver = false;
-        gamePause = true;
+        gamePause = false;
         last_update = getGame().getPlayMusic();
         this.score = 0;
         spawNextBlock();
@@ -79,9 +79,9 @@ public class Playing extends State implements StateMethods {
     {
         for(int i = 0; i<buttons.size(); i++)
         {
-            if(gamePause == false && i == 0)
+            if(gamePause == false && i == 1)
                 continue;
-            if(gamePause == true && i == 1)
+            if(gamePause == true && i == 0)
                 continue;
 
             buttons.get(i).drawMenuButton(g);
@@ -147,7 +147,7 @@ public class Playing extends State implements StateMethods {
 
     public void gamePause(Graphics g)
     {
-        if(gamePause == false && gameOver == false)
+        if(gamePause && gameOver == false)
         {
             BufferedImage gamePause = LoadFile.loadImage("Pictetric/pauseGame.png");
             g.drawImage(gamePause, 10, 100, 280, 280,null);
@@ -291,6 +291,7 @@ public class Playing extends State implements StateMethods {
         }
     }
 
+    //Ve cac khoi da roi xuong
     public void drawBackground(Graphics g) {
         if(currentBlock == null)
             return;
@@ -316,7 +317,7 @@ public class Playing extends State implements StateMethods {
 
     // Move
     public void moveBlockDown() {
-        if (checkBottom()&&gamePause)// Cham Day
+        if (checkBottom()&& gamePause == false)// Cham Day
         {
             moveBlockBackground();
             clearLines();
@@ -329,7 +330,7 @@ public class Playing extends State implements StateMethods {
                 spawCurrentBlock();
             return;
         }
-        if(gamePause)
+        if(gamePause == false)
             currentBlock.moveDown();
 
         return;
@@ -342,7 +343,7 @@ public class Playing extends State implements StateMethods {
             return;
         if (checkLeft())
             return;
-        if(gamePause)
+        if(gamePause == false)
             currentBlock.moveLeft();
     }
 
@@ -353,11 +354,11 @@ public class Playing extends State implements StateMethods {
             return;
         if (checkRight())
             return;
-        if(gamePause)
+        if(gamePause == false)
             currentBlock.moveRight();
     }
 
-    // Co dinh khoi khi cham day
+    //Luu vi tri cac khoi roi xuong
     private void moveBlockBackground() {
         if(gameOver == true)
             return;
@@ -400,7 +401,14 @@ public class Playing extends State implements StateMethods {
 
             }
         }
-        this.score += 10*line;
+        if(line == 1)
+            this.score += (getGame().getMenu().getLevel()+1) *40;
+        else if(line == 2)
+            this.score += (getGame().getMenu().getLevel()+1) *100;
+        else if(line == 3)
+            this.score += (getGame().getMenu().getLevel()+1) *300;
+        else if(line >= 4)
+            this.score += (getGame().getMenu().getLevel()+1) *1200;
     }
 
     public void clearLine(int y) {
@@ -417,9 +425,9 @@ public class Playing extends State implements StateMethods {
         }
     }
 
-    // Rotate
+    // Xoay
     public void rotateShape() {
-        if(!gamePause || gameOver)
+        if(gamePause || gameOver)
             return;
 
         int[][] rotatedShape = null;
