@@ -12,8 +12,6 @@ public class TetrisBlock implements Cloneable{
 	
 	private long now, lastTime;
 	
-	private boolean collision = false;
-    
     public TetrisBlock(int[][] shape, Color color)
     {
         this.shape = shape; //Khoi Tao block
@@ -64,7 +62,7 @@ public class TetrisBlock implements Cloneable{
     public void moveDown()
     {
         now = System.currentTimeMillis();
-        if(now - lastTime > delay && !collision) {
+        if(now - lastTime > delay) {
 			lastTime = now;
 			this.y++;
         }
@@ -74,6 +72,7 @@ public class TetrisBlock implements Cloneable{
     {
         this.y--;
     }
+
     public void moveLeft()
     {
         this.x--;
@@ -83,7 +82,7 @@ public class TetrisBlock implements Cloneable{
         this.x++;
     }
 
-    //Rotate
+    //Ma Tran Chuyen Vi
     public int[][] transposeMatrix(int[][] matrix) {
         int[][] temp = new int[matrix[0].length][matrix.length];
         for (int i = 0; i < matrix.length; i++) {
@@ -94,6 +93,7 @@ public class TetrisBlock implements Cloneable{
         return temp;
     }
 
+    
     public int[][] reverseRows(int[][] matrix) {
 
         int middle = matrix.length / 2;
