@@ -1,5 +1,6 @@
 # Tetris
 ##Mô tả
+
 -Đây là một đồ án game tên là Tetris được viết Java.
 
 -Đồ án được quản lý bởi Visual Studio Code.
